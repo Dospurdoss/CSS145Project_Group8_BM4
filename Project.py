@@ -267,8 +267,7 @@ future = prophet_model.make_future_dataframe(periods=forecast_years, freq='Y')
 prophet_forecast = prophet_model.predict(future)
 
 # Streamlit app layout
-
-st.write("This application visualizes the components of the Prophet model.")
+st.subheader("This application visualizes the components of the Prophet model.")
 
 # Plotting the components
 fig = prophet_model.plot_components(prophet_forecast)
