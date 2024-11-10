@@ -74,6 +74,19 @@ ax.set_ylabel('Score')
 ax.grid(True)
 st.pyplot(fig)
 
+# Title of the Streamlit app
+st.title("Anime Genre Frequency Analysis")
+
+# Analyze genres
+anime_genres = anime_df['genre'].str.split(',').explode().str.strip()
+
+# Frequency of genres
+genre_counts = anime_genres.value_counts()
+
+# Display genre counts in Streamlit
+st.subheader("Frequency of Genres")
+st.write(genre_counts)
+
 # Bar Plot: Genre Distribution
 st.subheader("Genre Frequency Distribution")
 anime_genres = anime_df['genre'].str.split(',').explode().str.strip()
