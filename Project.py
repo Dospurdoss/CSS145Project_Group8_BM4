@@ -29,8 +29,8 @@ This application allows you to explore anime data, visualize trends, and use mac
 # Load datasets from the GitHub repository
 @st.cache_data
 def load_data():
-    anime_df = pd.read_csv("path_to_repository/anime_cleaned.csv")
-    user_df = pd.read_csv("path_to_repository/users_cleaned.csv")
+    anime_df = pd.read_csv("anime_cleaned.csv")
+    user_df = pd.read_csv("users_cleaned.csv")
     return anime_df, user_df
 
 anime_df, user_df = load_data()
