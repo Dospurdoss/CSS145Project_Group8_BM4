@@ -120,6 +120,30 @@ ax.set_ylabel('Days Spent Watching')
 ax.grid(True)
 st.pyplot(fig)
 
+# Title of the Streamlit app
+st.title("Top-Rated Anime Analysis")
+
+# Get the top 20 anime based on score
+top_anime_df = anime_df.sort_values(by='score', ascending=False).head(20)
+
+# Display top anime DataFrame
+st.subheader("Top 20 Anime by Score")
+st.write(top_anime_df)
+
+# Horizontal bar plot of top-rated anime
+plt.figure(figsize=(12, 8))
+plt.barh(top_anime_df['title'], top_anime_df['score'], color='purple', alpha=0.6, edgecolor='darkslategray', height=0.6)
+plt.xlabel('Score')
+plt.ylabel('Anime Title')
+plt.title('Top-Rated Anime by Score')
+plt.gca().invert_yaxis()  # Invert y axis to have the highest score at the top
+plt.grid(axis='x', linestyle='--', alpha=0.7)
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=9)
+
+# Display the plot in Streamlit
+st.pyplot(plt)
+
 # Pie Chart: Anime Watching Status Distribution
 st.subheader("Proportion of Users in Each Anime Status")
 status_counts = {
