@@ -47,15 +47,37 @@ anime_df['episodes'] = pd.to_numeric(anime_df['episodes'], errors='coerce')
 anime_df['score'] = pd.to_numeric(anime_df['score'], errors='coerce')
 user_df['user_days_spent_watching'] = pd.to_numeric(user_df['user_days_spent_watching'], errors='coerce')
 
-# Scatter Plot: Score vs Episodes
-st.subheader("Scatter Plot: Anime Score vs Episodes")
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.scatter(anime_df['episodes'], anime_df['score'], color='green', alpha=0.6)
-ax.set_title('Scatter Plot of Anime Score vs Episodes')
-ax.set_xlabel('Episodes')
-ax.set_ylabel('Score')
-ax.grid(True)
-st.pyplot(fig)
+# Convert 'episodes' and 'score' to numeric, coercing errors to NaN
+anime_df['episodes'] = pd.to_numeric(anime_df['episodes'], errors='coerce')
+anime_df['score'] = pd.to_numeric(anime_df['score'], errors='coerce')
+
+# Frequency of episode counts
+episode_counts = anime_df['episodes'].value_counts()
+st.subheader("Frequency of Episode Counts")
+st.write(episode_counts)
+
+# Anime with the highest number of episodes
+highest_episode_anime = anime_df.loc[anime_df['episodes'].idxmax()]
+st.subheader("Anime with the Highest Number of Episodes")
+st.write(highest_episode_anime)
+
+# Clean DataFrame by dropping rows with NaN values in 'episodes' or 'score'
+anime_df_clean = anime_df.dropna(subset=['episodes', 'score'])
+
+# Scatter plot of Anime Score vs Episodes
+plt.figure(figsize=(10, 6))
+plt.scatter(anime_df_clean['episodes'], anime_df_clean['score'], color='green', alpha=0.6)
+plt.title('Scatter Plot of Anime Score vs Episodes')
+plt.xlabel('Episodes')
+plt.ylabel('Score')
+plt.grid(True)
+
+# Display the plot in Streamlit
+st.pyplot(plt)
+
+# Optional: Display the cleaned DataFrame
+st.subheader("Cleaned Anime Data")
+st.write(anime_df_clean)
 
 # Bar Plot: Genre Distribution
 st.subheader("Genre Frequency Distribution")
