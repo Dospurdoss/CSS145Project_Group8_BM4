@@ -183,3 +183,30 @@ ax.set_xlabel("Year")
 ax.set_ylabel("Average Score")
 ax.legend()
 st.pyplot(fig)
+
+
+# Aggregate average scores by year
+data = anime_df.groupby('aired_from_year')['score'].mean().reset_index()
+data = data.rename(columns={'aired_from_year': 'Year', 'score': 'Average Score'})
+
+# Prepare data for Prophet
+prophet_data = data.rename(columns={'Year': 'ds', 'Average Score': 'y'})
+
+# Initialize and fit the Prophet model
+prophet_model = Prophet(yearly_seasonality=True)
+prophet_model.fit(prophet_data)
+
+# Forecast for the next 5 years
+forecast_years = 5
+future = prophet_model.make_future_dataframe(periods=forecast_years, freq='Y')
+prophet_forecast = prophet_model.predict(future)
+
+# Streamlit app layout
+st.title("Prophet Model Components Visualization")
+st.write("This application visualizes the components of the Prophet model.")
+
+# Plotting the components
+fig = prophet_model.plot_components(prophet_forecast)
+
+# Display the plot in Streamlit
+st.pyplot(fig)
