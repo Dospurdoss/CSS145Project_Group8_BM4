@@ -18,7 +18,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import GradientBoostingRegressor, ExtraTreesRegressor
 
 # Set Streamlit page configuration
-st.set_page_config(page_title="Anime Data Analysis", layout="auto")
+st.set_page_config(page_title="Anime Data Analysis", layout="centered")
 
 # Title and description
 st.title("Anime Data Analysis and Recommendation System")
