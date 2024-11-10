@@ -122,6 +122,30 @@ if input_anime in anime_df['title'].values:
 else:
     st.write(f"{input_anime} not found in the dataset.")
 
+# Function to recommend top anime based on score
+def recommend_top_anime(anime_df, top_n=5):
+    # Sort the anime by score in descending order
+    top_anime = anime_df.sort_values(by='score', ascending=False).head(top_n)
+    return top_anime[['title', 'title_english', 'score']]
+
+# Streamlit app layout
+st.title("Top Anime Recommendations")
+st.write("This application recommends the top anime based on their scores.")
+
+# User input for number of recommendations
+top_n = st.slider("Select number of top anime to recommend:", min_value=1, max_value=20, value=5)
+
+# Get recommended anime
+recommended_anime = recommend_top_anime(anime_df, top_n)
+
+# Display the recommendations in a clear format
+st.subheader("Top Recommended Anime Based on Scores:")
+for index, row in recommended_anime.iterrows():
+    st.write(f"**Title:** {row['title']}")
+    st.write(f"**English Title:** {row['title_english']}")
+    st.write(f"**Score:** {row['score']:.1f}")
+    st.write("---")  # Separator line for each anime
+
 # Forecasting Average Anime Score with ARIMA
 st.subheader("Average Anime Score Forecast with ARIMA")
 anime_df['aired_from_year'] = pd.to_datetime(anime_df['aired_from_year'], format='%Y')
