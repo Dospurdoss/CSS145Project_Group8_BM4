@@ -99,6 +99,17 @@ ax.set_ylabel('Frequency')
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
+
+# Title of the Streamlit app
+st.title("Anime Watching Days Analysis")
+
+# Analyze days spent watching anime
+daysspent_counts = user_df['user_days_spent_watching'].value_counts()
+
+# Display days spent watching counts in Streamlit
+st.subheader("Days Spent Watching Anime")
+st.write(daysspent_counts)
+
 # Line Plot: User Days Spent Watching
 st.subheader("User Days Spent Watching Over Time")
 fig, ax = plt.subplots(figsize=(10, 6))
