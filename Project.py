@@ -147,19 +147,6 @@ st.pyplot(plt)
 # Title of the Streamlit app
 st.title("Anime User Status Analysis")
 
-# Calculate the status counts
-status_counts = {
-    'Watching': user_df['user_watching'].sum(),
-    'Completed': user_df['user_completed'].sum(),
-    'On Hold': user_df['user_onhold'].sum(),
-    'Dropped': user_df['user_dropped'].sum(),
-    'Plan to Watch': user_df['user_plantowatch'].sum()
-}
-
-# Display status counts in Streamlit
-st.subheader("Proportion of Users in Each Anime Status")
-st.write(status_counts)
-
 # Pie Chart: Anime Watching Status Distribution
 st.subheader("Proportion of Users in Each Anime Status")
 status_counts = {
