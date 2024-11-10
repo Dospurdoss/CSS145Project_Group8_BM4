@@ -64,20 +64,15 @@ st.write(highest_episode_anime)
 # Clean DataFrame by dropping rows with NaN values in 'episodes' or 'score'
 anime_df_clean = anime_df.dropna(subset=['episodes', 'score'])
 
-# Scatter plot of Anime Score vs Episodes
-plt.figure(figsize=(10, 6))
-plt.scatter(anime_df_clean['episodes'], anime_df_clean['score'], color='green', alpha=0.6)
-plt.title('Scatter Plot of Anime Score vs Episodes')
-plt.xlabel('Episodes')
-plt.ylabel('Score')
-plt.grid(True)
-
-# Display the plot in Streamlit
-st.pyplot(plt)
-
-# Optional: Display the cleaned DataFrame
-st.subheader("Cleaned Anime Data")
-st.write(anime_df_clean)
+# Scatter Plot: Score vs Episodes
+st.subheader("Scatter Plot: Anime Score vs Episodes")
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(anime_df['episodes'], anime_df['score'], color='green', alpha=0.6)
+ax.set_title('Scatter Plot of Anime Score vs Episodes')
+ax.set_xlabel('Episodes')
+ax.set_ylabel('Score')
+ax.grid(True)
+st.pyplot(fig)
 
 # Bar Plot: Genre Distribution
 st.subheader("Genre Frequency Distribution")
