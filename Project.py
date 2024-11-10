@@ -209,6 +209,8 @@ for index, row in recommended_anime.iterrows():
     st.write(f"**Score:** {row['score']:.1f}")
     st.write("---")  # Separator line for each anime
 
+st.title("Prophet Model Components Visualization")
+
 # Forecasting Average Anime Score with ARIMA
 st.subheader("Average Anime Score Forecast with ARIMA")
 anime_df['aired_from_year'] = pd.to_datetime(anime_df['aired_from_year'], format='%Y')
@@ -265,7 +267,7 @@ future = prophet_model.make_future_dataframe(periods=forecast_years, freq='Y')
 prophet_forecast = prophet_model.predict(future)
 
 # Streamlit app layout
-st.title("Prophet Model Components Visualization")
+
 st.write("This application visualizes the components of the Prophet model.")
 
 # Plotting the components
