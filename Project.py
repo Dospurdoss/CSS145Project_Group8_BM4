@@ -144,8 +144,10 @@ plt.yticks(fontsize=9)
 # Display the plot in Streamlit
 st.pyplot(plt)
 
-# Pie Chart: Anime Watching Status Distribution
-st.subheader("Proportion of Users in Each Anime Status")
+# Title of the Streamlit app
+st.title("Anime User Status Analysis")
+
+# Calculate the status counts
 status_counts = {
     'Watching': user_df['user_watching'].sum(),
     'Completed': user_df['user_completed'].sum(),
@@ -153,11 +155,20 @@ status_counts = {
     'Dropped': user_df['user_dropped'].sum(),
     'Plan to Watch': user_df['user_plantowatch'].sum()
 }
-fig, ax = plt.subplots(figsize=(8, 6))
-ax.pie(status_counts.values(), labels=status_counts.keys(), autopct='%1.1f%%', startangle=90,
-       colors=['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0'])
-ax.set_title('Proportion of Users in Each Anime Status')
-st.pyplot(fig)
+
+# Display status counts in Streamlit
+st.subheader("Proportion of Users in Each Anime Status")
+st.write(status_counts)
+
+# Pie chart of user status proportions
+plt.figure(figsize=(8, 8))
+plt.pie(status_counts.values(), labels=status_counts.keys(), autopct='%1.1f%%', startangle=90,
+        colors=['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0'])
+plt.title('Proportion of Users in Each Anime Status')
+plt.axis('equal')  # Equal aspect ratio ensures that pie chart is circular.
+
+# Display the plot in Streamlit
+st.pyplot(plt)
 
 # Pair Plot
 st.subheader("Pair Plot of Anime Data")
